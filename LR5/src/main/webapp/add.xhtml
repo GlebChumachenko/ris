@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+   <title>Add Customer</title>
+</h:head>
+
+<h:body>
+   <h1>Add Customer</h1>
+   <h:form>
+         <h:outputLabel for="zip" value="Zip:" />
+         <h:inputText id="zip" value="#{mainController.customer.zip}" required="true">
+            <f:validator validatorId="zipValidator"/>
+         </h:inputText>
+         <h:message for="zip" errorStyle="color:blue" />
+      <br/>
+         <h:outputLabel for="name_customer" value="Name:" />
+      <h:inputText id="name_customer" value="#{mainController.customer.name_customer}">
+         <f:validator validatorId="nameValidator"/>
+      </h:inputText>
+      <h:message for="name_customer" errorStyle="color:blue" />
+      <br/>
+         <h:outputLabel for="address" value="Address:" />
+      <h:inputText id="address" value="#{mainController.customer.address}">
+         <f:validator validatorId="addressValidator"/>
+      </h:inputText>
+      <h:message for="address" errorStyle="color:blue" />
+      <br/>
+         <h:outputLabel for="email" value="Email:" />
+         <h:inputText id="email" value="#{mainController.customer.email}">
+            <f:validator validatorId="emailValidator"/>
+         </h:inputText>
+         <h:message for="email" errorStyle="color:blue" />
+      <br/>
+      <h:outputLabel for="state" value="State:" />
+      <h:selectOneMenu id="state" value="#{mainController.customer.state}" required="true">
+         <f:selectItems value="#{mainController.states}" var="state" itemValue="#{state}" itemLabel="#{state}" />
+      </h:selectOneMenu>
+      <br/>
+      <h:commandButton value="Add" action="#{mainController.addCustomer}"/>
+
+   </h:form>
+   <br/>
+   <br/>
+   <h:button outcome="index.xhtml" value="Back"/>
+</h:body>
+
+</html>

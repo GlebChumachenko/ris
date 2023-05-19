@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+   <title>Customer List</title>
+</h:head>
+
+<h:body>
+   <h1>Update Customer</h1>
+   <h:form>
+
+      <h:panelGrid columns="7" border="1">
+         <h:outputText value="id"/>
+         <h:outputText value="name"/>
+         <h:outputText value="zip"/>
+         <h:outputText value="address"/>
+         <h:outputText value="email"/>
+         <h:outputText value="state"/>
+         <h:outputText value="action"/>
+         <c:set var="customers" value="#{mainController.getAll()}"/>
+         <c:forEach items="${customers}" var="customer">
+            <h:outputText value="${customer.id}"/>
+            <h:outputText value="${customer.name_customer}"/>
+            <h:outputText value="${customer.zip}"/>
+            <h:outputText value="${customer.address}"/>
+            <h:outputText value="${customer.email}"/>
+            <h:outputText value="${customer.state}"/>
+            <h:commandButton value="Select" action="#{mainController.setCustomer(customer)}"/>
+         </c:forEach>
+      </h:panelGrid>
+   </h:form>
+   <h:form>
+      <hr/>Name : <h:inputText id = "name_customer" value="#{mainController.customer.name_customer}">
+            <f:validator validatorId="nameValidator"/>
+            </h:inputText>
+            <h:message for="name_customer" errorStyle="color:blue" /><br/>
+       <h:outputLabel value="Zip :"/>
+       <h:inputText id="zip" value="#{mainController.customer.zip}">
+            <f:validator validatorId="zipValidator"/>
+            </h:inputText>
+            <h:message for="zip" errorStyle="color:blue" /><br/>
+       <h:outputLabel value="Address :"/>
+       <h:inputText id = "address" value="#{mainController.customer.address}">
+            <f:validator validatorId="addressValidator"/>
+            </h:inputText>
+            <h:message for="address" errorStyle="color:blue" /><br/>
+       <h:outputLabel value="Email :"/>
+       <h:inputText id = "email" value="#{mainController.customer.email}">
+            <f:validator validatorId="emailValidator"/>
+            </h:inputText>
+            <h:message for="email" errorStyle="color:blue" /><br/>
+       <h:outputLabel value="State :"/>
+       <h:selectOneMenu id="state" value="#{mainController.customer.state}" required="true">
+            <f:selectItems value="#{mainController.states}" var="state" itemValue="#{state}" itemLabel="#{state}" />
+            </h:selectOneMenu>
+            <h:message for="state" errorStyle="color:blue"/><br/>
+      <h:commandButton value="Update" action="#{mainController.updateCustomer(mainController.customer)}"/>
+   </h:form>
+   <h:form>
+      <br/>
+      <br/>
+      <h:commandButton value="Back" action="#{mainController.removeCustomerAndBack()}"/>
+   </h:form>
+</h:body>
+</html>

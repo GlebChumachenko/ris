@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+   <title>Search Customer</title>
+</h:head>
+
+<h:body>
+   <h1>Search Customer</h1>
+   <h:form>
+
+      <h:panelGrid columns="2">
+         <h:outputLabel for="customerId" value="Customer ID:" />
+         <h:inputText id="customerId" value="#{mainController.tempId}"  required="true"/>
+         <h:commandButton value="Search" action="#{mainController.findCustomerById(mainController.tempId)}" />
+      </h:panelGrid>
+
+   </h:form>
+   <c:set var = "customer" value="#{mainController.customer}"/>
+   <c:if test="${customer != null}">
+      <h5>Id: ${customer.id}</h5>
+      <h5>Name: ${customer.name_customer}</h5>
+      <h5>Zip: ${customer.zip}</h5>
+      <h5>Address: ${customer.address}</h5>
+      <h5>Email: ${customer.email}</h5>
+   </c:if>
+   <c:if test="${customer == null}">
+      <h2>No customer with this id was found</h2>
+   </c:if>
+
+   <h:form>
+      <br/>
+      <br/>
+      <h:commandButton value="Back" action="#{mainController.removeCustomerAndBack()}"/>
+   </h:form>
+</h:body>
+
+</html>
